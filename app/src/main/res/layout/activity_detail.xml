@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="id" type="Integer"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.jerrellmardis.materialanimations.DetailActivity">
+
+        <Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MaterialAnimations.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:title="@string/app_name"
+            android:transitionName="@string/toolbar_transition_name"/>
+
+        <View android:id="@+id/item"
+              android:layout_width="match_parent"
+              android:layout_height="200dp"
+              android:layout_gravity="top"
+              android:transitionName="@{@string/shared_element_transition_name + id}"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingMultiplier="1.26315789474"
+                  android:paddingLeft="@dimen/activity_horizontal_margin"
+                  android:paddingRight="@dimen/activity_horizontal_margin"
+                  android:paddingTop="@dimen/activity_horizontal_margin"
+                  android:text="Lorem ipsum dolor sit amet, vel dis conubia nec donec dolor. Mattis nunc, vestibulum nonummy amet morbi vel, nulla maecenas integer phasellus enim. Tempor nulla, dolor dapibus, elit quisque pharetra, libero morbi id rhoncus montes purus, integer sollicitudin neque ac. Rhoncus sollicitudin egestas, nulla risus turpis ipsum fringilla velit, id et sociosqu commodo sapien viverra, ut porttitor mollis eu eos. Imperdiet vel tortor mus, donec nulla, magna commodo eget cras ultricies, quis venenatis vestibulum pellentesque sed vel wisi, eget enim convallis cras habitant vestibulum. Tellus suscipit dui ac faucibus, pellentesque purus wisi vitae, convallis donec, morbi class, vehicula sit sapien non aliquam. At lectus metus pharetra, scelerisque felis eget pellentesque, non pulvinar in facilisis."
+                  android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                  android:textColor="?android:textColorSecondary"/>
+
+    </LinearLayout>
+
+</layout>

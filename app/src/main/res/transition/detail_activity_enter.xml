@@ -1,0 +1,6 @@
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <slide android:duration="@android:integer/config_mediumAnimTime"
+           android:interpolator="@android:interpolator/linear_out_slow_in"
+           android:slideEdge="bottom"/>
+    <fade/>
+</transitionSet>

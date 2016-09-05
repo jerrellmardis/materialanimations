@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Material Animations</string>
+
+    <string name="shared_element_transition_name">shared_element_transition_name</string>
+    <string name="toolbar_transition_name">toolbar_transition_name</string>
+</resources>

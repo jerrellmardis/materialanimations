@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changeBounds xmlns:android="http://schemas.android.com/apk/res/android"
+              android:duration="@android:integer/config_mediumAnimTime"
+              android:interpolator="@android:interpolator/decelerate_cubic">
+    <arcMotion android:maximumAngle="50"/>
+</changeBounds>

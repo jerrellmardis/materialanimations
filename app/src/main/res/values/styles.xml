@@ -1,0 +1,34 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Main">
+        <item name="android:windowExitTransition">@transition/main_activity_exit</item>
+        <item name="android:windowReenterTransition">@transition/main_activity_reenter</item>
+    </style>
+
+    <style name="AppTheme.Details">
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_activity_shared_element</item>
+        <item name="android:windowEnterTransition">@transition/detail_activity_enter</item>
+    </style>
+
+    <style name="Widget.MaterialAnimations" parent="android:Widget" />
+
+    <style name="Widget.MaterialAnimations.Toolbar">
+        <item name="android:titleTextAppearance">@style/TextAppearance.ToolbarTitleSmallCaps</item>
+        <item name="android:background">?android:colorPrimary</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:theme">@android:style/ThemeOverlay.Material.Dark</item>
+    </style>
+
+    <style name="TextAppearance.ToolbarTitleSmallCaps" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
+        <item name="android:textColor">#fff</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+        <item name="android:letterSpacing">0.2</item>
+    </style>
+
+</resources>

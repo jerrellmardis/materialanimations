@@ -1,0 +1,26 @@
+<resources>
+    <array name="colors">
+        <item name="red_400" type="color">#e84e40</item>
+        <item name="pink_A200" type="color">#ff4081</item>
+        <item name="deep_purple_400" type="color">#7e57c2</item>
+        <item name="deep_purple_A200" type="color">#7c4dff</item>
+        <item name="indigo_400" type="color">#5c6bc0</item>
+        <item name="orange_A200" type="color">#ffab40</item>
+        <item name="red_A200" type="color">#ff5177</item>
+        <item name="indigo_A200" type="color">#536dfe</item>
+        <item name="blue_400" type="color">#738ffe</item>
+        <item name="blue_A200" type="color">#6889ff</item>
+        <item name="light_blue_400" type="color">#29b6f6</item>
+        <item name="light_blue_A200" type="color">#40c4ff</item>
+        <item name="cyan_400" type="color">#26c6da</item>
+        <item name="purple_400" type="color">#ab47bc</item>
+        <item name="cyan_A400" type="color">#00e5ff</item>
+        <item name="teal_400" type="color">#26a69a</item>
+        <item name="green_400" type="color">#2baf2b</item>
+        <item name="green_A200" type="color">#5af158</item>
+        <item name="amber_400" type="color">#ffca28</item>
+        <item name="orange_A400" type="color">#ff9100</item>
+        <item name="deep_orange_400" type="color">#ff7043</item>
+        <item name="deep_orange_A200" type="color">#ff6e40</item>
+    </array>
+</resources>

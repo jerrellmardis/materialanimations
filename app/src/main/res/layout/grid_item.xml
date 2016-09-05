@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ../layout/item.xml -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="presenter" type="com.jerrellmardis.materialanimations.PresenterImpl"/>
+        <variable name="backgroundColor" type="Integer"/>
+        <variable name="id" type="Integer"/>
+    </data>
+
+    <View
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:background="@{backgroundColor}"
+        android:foreground="?attr/selectableItemBackground"
+        android:onClick="@{(view) -> presenter.onItemSelected(view, id, backgroundColor)}"
+        android:transitionName="@{@string/shared_element_transition_name + id}"/>
+
+</layout>

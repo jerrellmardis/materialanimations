@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.jerrellmardis.materialanimations.MainActivity">
+
+    <data>
+        <variable name="presenter" type="com.jerrellmardis.materialanimations.PresenterImpl"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="@dimen/grid_item_spacing"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:transitionGroup="false"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="3"/>
+
+        <FrameLayout android:id="@+id/reveal_container"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+
+            <TextView android:id="@+id/reveal_text"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:scaleX="0"
+                      android:scaleY="0"
+                      android:text="TA DA!!"
+                      android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                      android:textColor="#fff"/>
+
+        </FrameLayout>
+
+        <Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MaterialAnimations.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:title="@string/app_name"
+            android:transitionName="@string/toolbar_transition_name"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="@{(view) -> presenter.onFabClicked(view)}"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="@android:color/white"/>
+
+    </FrameLayout>
+
+</layout>
