@@ -17,6 +17,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // bind the id and background color to the View
         ActivityDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         binding.setId(getIntent().getIntExtra(EXTRA_ID, 0));
         binding.item.setBackgroundColor(getIntent().getIntExtra(EXTRA_BG_COLOR, 0));

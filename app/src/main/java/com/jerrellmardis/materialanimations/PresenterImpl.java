@@ -2,9 +2,7 @@ package com.jerrellmardis.materialanimations;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.support.annotation.ColorRes;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
@@ -13,9 +11,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.BounceInterpolator;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.jerrellmardis.materialanimations.databinding.ActivityMainBinding;
 
@@ -28,9 +24,8 @@ public class PresenterImpl implements Presenter {
     }
 
     private final OnItemSelectedListener listener;
-    private boolean isRevealContainerShowing;
-    private int intialFabX;
-    private int intialFabY;
+    private int initialFabX;
+    private int initialFabY;
 
     public PresenterImpl(OnItemSelectedListener listener) {
         this.listener = listener;
@@ -43,60 +38,43 @@ public class PresenterImpl implements Presenter {
 
     @Override
     public void onFabClicked(View view) {
-        final TextView revealText = (TextView) ((ViewGroup) view.getParent()).findViewById(R.id.reveal_text);
-        revealText.setAlpha(1f);
-        revealText.setScaleX(0f);
-        revealText.setScaleY(0f);
+        ViewGroup rootView = (ViewGroup) view.getRootView();
+        View revealContainer = rootView.findViewById(R.id.reveal_container);
+        View revealTextView = rootView.findViewById(R.id.reveal_text);
 
-        intialFabX = (view.getLeft() + view.getRight()) / 2;
-        intialFabY = (view.getTop() + view.getBottom()) / 2;
+        // set the initial state of the revealTextView
+        revealTextView.setAlpha(1f);
+        revealTextView.setScaleX(0f);
+        revealTextView.setScaleY(0f);
 
-        final FloatingActionButton fab = (FloatingActionButton) view;
-        final ViewGroup.LayoutParams originalParams = fab.getLayoutParams();
-        Transition transition = TransitionInflater.from(fab.getContext()).inflateTransition(R.transition.fab_transition);
-        transition.addListener(new TransitionCallback() {
-            @Override
-            public void onTransitionEnd(Transition transition) {
-                isRevealContainerShowing = true;
-                final ViewGroup revealContainer = (ViewGroup) ((ViewGroup) fab.getParent()).findViewById(R.id.reveal_container);
-                animateRevealColor(revealContainer, R.color.colorAccent);
-                fab.setLayoutParams(originalParams);
-                fab.setVisibility(View.GONE);
-            }
+        // find the center point of the FAB
+        initialFabX = (view.getLeft() + view.getRight()) / 2;
+        initialFabY = (view.getTop() + view.getBottom()) / 2;
 
-            private void animateRevealColor(ViewGroup viewRoot, @ColorRes int color) {
-                int cx = (viewRoot.getLeft() + viewRoot.getRight()) / 2;
-                int cy = (viewRoot.getTop() + viewRoot.getBottom()) / 2;
-                float finalRadius = (float) Math.hypot(viewRoot.getWidth(), viewRoot.getHeight());
+        FloatingActionButton fab = (FloatingActionButton) view;
 
-                viewRoot.setBackgroundColor(ContextCompat.getColor(viewRoot.getContext(), color));
+        // load the fab transition, add the FabTransitionCallback and start the transition
+        Transition transition = TransitionInflater.from(view.getContext()).inflateTransition(R.transition.fab_transition);
+        transition.addListener(new FabTransitionCallback(fab, revealContainer, revealTextView));
 
-                Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, cx, cy, 0, finalRadius);
-                anim.setDuration(viewRoot.getResources().getInteger(android.R.integer.config_longAnimTime));
-                anim.setInterpolator(new AccelerateDecelerateInterpolator());
-                anim.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        revealText.animate().scaleX(1).scaleY(1).setInterpolator(new BounceInterpolator()).setDuration(500).start();
-                    }
-                });
-                anim.start();
-            }
-        });
-        TransitionManager.beginDelayedTransition((ViewGroup) fab.getParent(), transition);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER);
-        fab.setLayoutParams(layoutParams);
+        // 1. saves the current property values of all views in the rootView
+        // 2. adds an OnPreDrawListener which is triggered on the next layout pass
+        TransitionManager.beginDelayedTransition(rootView, transition);
+
+        // 3. triggers the OnPreDrawListener created in TransitionManager.beginDelayedTransition
+        // 4. OnPreDrawListener retrieves the new property values
+        // 5. the system calculates the before/after property values and runs the animations
+        fab.setLayoutParams(new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, Gravity.CENTER));
     }
 
     @Override
     public boolean onBackPressed(final ActivityMainBinding binding) {
-        if (isRevealContainerShowing) {
-            isRevealContainerShowing = false;
+        if (View.GONE == binding.fab.getVisibility()) {
             float finalRadius = (float) Math.hypot(binding.revealContainer.getWidth(), binding.revealContainer.getHeight());
 
             binding.revealText.animate().alpha(0).scaleX(0).scaleY(0).start();
 
-            Animator anim = ViewAnimationUtils.createCircularReveal(binding.revealContainer, intialFabX, intialFabY, finalRadius, 0);
+            Animator anim = ViewAnimationUtils.createCircularReveal(binding.revealContainer, initialFabX, initialFabY, finalRadius, 0);
             anim.setDuration(binding.revealContainer.getResources().getInteger(android.R.integer.config_longAnimTime));
             anim.setInterpolator(new AccelerateDecelerateInterpolator());
             anim.addListener(new AnimatorListenerAdapter() {

@@ -34,8 +34,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_gravity="center"
-                      android:scaleX="0"
-                      android:scaleY="0"
+                      android:alpha="0"
                       android:text="TA DA!!"
                       android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                       android:textColor="#fff"/>
